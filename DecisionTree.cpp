@@ -383,53 +383,53 @@ void random_forest()
     }
 
 
-//    rate=2/9.0;
-//    for(tree=1;tree<=200;tree++)
-//    {
-//        vector<data> query_test;
-//        for(i=0;i<=2;i++)
-//        {
-//            for(j=1;j<=data_size[1]*rate;j++)
-//            {
-//                pos=Rand(0,data_size[i]-j);
-//                query_test.push_back(dataset[i][pos]);
-//                dataset[i].erase(dataset[i].begin()+pos);
-//            }
-//            data_size[i]-=data_size[i]*rate;
-//        }
-//        node *root=new node();
-//        for(i=0;i<=2;i++)
-//        {
-//            for(j=1;j<=data_size[1]*(1-rate);j++)
-//            {
-//                pos=Rand(0,data_size[i]-1);
-//                root->current_data.push_back(dataset[i][pos]);
-//            }
-//        }
-//        for(i=1;i<=Rand(0,number_of_atk-1);i++)
-//            root->check_box[Rand(0,number_of_atk)]=1;
-//        //65-88
-//        //93-88
-//        //33-57
-//        //36-62
-//        ID3Build(root,2,24);
-//
-//        for(i=0;i<query_test.size();i++)
-//            ans.push_back(get_label(query_test[i],root));
-//        trust=f1Score(ans,query_test);
-//        for(i=0;i<query.size();i++)
-//        {
-//            c=get_label(query[i],root);
-//            info[i][convert(c)]+=trust;
-//        }
-//        for(i=0;i<query_test.size();i++)
-//        {
-//            data_size[convert(query_test[i].label)]++;
-//            dataset[convert(query_test[i].label)].push_back(query_test[i]);
-//        }
-//        delete_tree(root);
-//        ans.clear();
-//    }
+    rate=2/9.0;
+    for(tree=1;tree<=200;tree++)
+    {
+        vector<data> query_test;
+        for(i=0;i<=2;i++)
+        {
+            for(j=1;j<=data_size[1]*rate;j++)
+            {
+                pos=Rand(0,data_size[i]-j);
+                query_test.push_back(dataset[i][pos]);
+                dataset[i].erase(dataset[i].begin()+pos);
+            }
+            data_size[i]-=data_size[i]*rate;
+        }
+        node *root=new node();
+        for(i=0;i<=2;i++)
+        {
+            for(j=1;j<=data_size[1]*(1-rate);j++)
+            {
+                pos=Rand(0,data_size[i]-1);
+                root->current_data.push_back(dataset[i][pos]);
+            }
+        }
+        for(i=1;i<=Rand(0,number_of_atk-1);i++)
+            root->check_box[Rand(0,number_of_atk)]=1;
+        //65-88
+        //93-88
+        //33-57
+        //36-62
+        ID3Build(root,2,24);
+
+        for(i=0;i<query_test.size();i++)
+            ans.push_back(get_label(query_test[i],root));
+        trust=f1Score(ans,query_test);
+        for(i=0;i<query.size();i++)
+        {
+            c=get_label(query[i],root);
+            info[i][convert(c)]+=trust;
+        }
+        for(i=0;i<query_test.size();i++)
+        {
+            data_size[convert(query_test[i].label)]++;
+            dataset[convert(query_test[i].label)].push_back(query_test[i]);
+        }
+        delete_tree(root);
+        ans.clear();
+    }
     trust=0;
     for(i=0;i<query.size();i++)
     {
